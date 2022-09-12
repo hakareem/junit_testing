@@ -6,7 +6,12 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 public class TodoTest {
-        @Test public void addTask() {
+        @Test public void startWithEmptyList(){
+            Todo todo = new Todo();
+            assertTrue("initial task list is empty", todo.list.isEmpty());
+        }
+        
+        @Test public void shouldAddTask() {
         Todo test = new Todo();
         String firstTodo = "Run";
         String secondTodo = "Walk";
@@ -24,7 +29,7 @@ public class TodoTest {
         assertEquals(result, test.list);
     }
 
-        @Test public void getTodo() {
+        @Test public void ShouldReturnTodos() {
         Todo test = new Todo();
         test.addTask("Who");
         test.addTask("When");
