@@ -32,6 +32,6 @@ public class Game {
 }
     public String getRandomWordFromDictionary() {
         Random rand = new Random();
-        return DICTIONARY[rand.nextInt(3)];
+        return DICTIONARY[rand.nextInt(DICTIONARY.length)];
     }
 }
