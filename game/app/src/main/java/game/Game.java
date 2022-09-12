@@ -1,15 +1,20 @@
 package game;
 
+import java.util.Random;
+
 public class Game {
     String word;
     int attempts = 10;
-    
+
+    public static final String[] DICTIONARY = {"PENALDO", "PENZEMA", "PESSI", "LAKAKA"};
+
     // constructor 
-    public Game(String word) {
-        this.word = word;
+    public Game() {
+        this.word = getRandomWordFromDictionary();
     }
+
     public static void main(String[] args) {
-        Game testing = new Game("TESTING");
+        Game testing = new Game();
         System.out.println(testing.getWordToGuess()); // T______
     }
 
@@ -25,4 +30,8 @@ public class Game {
     }
     return builder.toString();
 }
+    public String getRandomWordFromDictionary() {
+        Random rand = new Random();
+        return DICTIONARY[rand.nextInt(3)];
+    }
 }
