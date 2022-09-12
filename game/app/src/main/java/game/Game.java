@@ -2,7 +2,8 @@ package game;
 
 public class Game {
     String word;
-
+    int attempts = 10;
+    
     // constructor 
     public Game(String word) {
         this.word = word;

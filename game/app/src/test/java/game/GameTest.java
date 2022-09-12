@@ -9,4 +9,9 @@ public class GameTest {
         Game game = new Game("Makers");
         assertEquals(game.getWordToGuess(), "M_____");
     }
+
+    @Test public void attemptsCounter() {
+    Game game = new Game("Makers");
+    assertEquals(game.attempts,10);
+    }
 }
