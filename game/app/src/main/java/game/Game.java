@@ -1,16 +1,13 @@
 package game;
 
-import java.util.Random;
-
 public class Game {
     String word;
     int attempts = 10;
 
-    public static final String[] DICTIONARY = {"PENALDO", "PENZEMA", "PESSI", "LAKAKA"};
-
     // constructor 
     public Game() {
-        this.word = getRandomWordFromDictionary();
+        WordChoser wordChoser = new WordChoser();
+        word = wordChoser.getRandomWordFromDictionary();
     }
 
     public static void main(String[] args) {
@@ -30,8 +27,4 @@ public class Game {
     }
     return builder.toString();
 }
-    public String getRandomWordFromDictionary() {
-        Random rand = new Random();
-        return DICTIONARY[rand.nextInt(DICTIONARY.length)];
-    }
 }
