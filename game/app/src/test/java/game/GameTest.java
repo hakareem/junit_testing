@@ -6,13 +6,13 @@ import static org.mockito.Mockito.*;
 import org.junit.Test;
 
 public class GameTest {
-    @Test public void testGetsWordToGuess() {
+    @Test public void testGetsMaskedWord() {
         WordChoser mockedChoser = mock(WordChoser.class);
-        when(mockedChoser.getRandomWordFromDictionary()).thenReturn("PESSI");
+        when(mockedChoser.getRandomWordFromDictionary()).thenReturn("DRAGON");
 
         Game game = new Game(mockedChoser);
-        String word = game.getWordToGuess();
-        assertEquals(game.getWordToGuess(), word);
+
+        assertEquals(game.getWordToGuess(), "D_____");
     }
 
     @Test public void attemptsCounter() {
