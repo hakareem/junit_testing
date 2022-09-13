@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Game {
     // class properties
-    private String word;
-    private ArrayList<Character> guessedLetters = new ArrayList<Character>();
+    public String word;
+    public ArrayList<Character> guessedLetters = new ArrayList<Character>();
     private int attempts;
 
 
@@ -18,26 +18,6 @@ public class Game {
     // returns number of attempts left
     public Integer remainingAttempts() {
         return this.attempts;
-    }
-
-    // handles the word displayed to user logic 
-    public String getWordToGuess() {
-        StringBuffer str = new StringBuffer(); // what is the difference between string builder and string buffer?
-
-        for (int i = 0; i < this.word.length(); i++) {
-            Character currentLetter = word.charAt(i);
-            
-            if (i == 0) { // first char always visible
-                str.append(currentLetter);
-            } else {
-                if (guessedLetters.indexOf(currentLetter) != -1) { // append char if guess is correct
-                    str.append(currentLetter);
-                } else {
-                    str.append("_");
-                }
-            }
-        }
-        return str.toString();
     }
 
     // handling user's guess
@@ -59,7 +39,8 @@ public class Game {
     }
 
     public Boolean isGameWon() {
-        if (getWordToGuess().contains("_") == true) { return false; }
+        Masker masker = new Masker();
+        if (masker.getMaskedWord(this.word, guessedLetters).contains("_") == true) { return false; }
         return true;
     }
 
