@@ -6,6 +6,7 @@ public class Game {
     private String word;
     private ArrayList<Character> guessedLetters = new ArrayList<Character>();
     private int attempts;
+    private String alert;
 
     // constructor 
     public Game(WordChoser choser) {
@@ -37,13 +38,14 @@ public class Game {
         return builder.toString();
     }
 
-    public Boolean guessLetter(Character letter) {
+    public String guessLetter(Character letter) {
         if (this.word.indexOf(letter) != -1) {
             guessedLetters.add(letter);
-            return true;
+            return "Nice, but stop cheating ;/";
         } else {
             attempts--;
-            return false;
+            return String.format("Wrong, %d attemps left.", this.attempts);
+
         }
     }
 
