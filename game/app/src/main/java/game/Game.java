@@ -48,7 +48,7 @@ public class Game {
     }
 
     public Boolean isGameWon() {
-        if (getWordToGuess().contains("_")== false) { return true; }
+        if (getWordToGuess().contains("_") == false) { return true; }
 
         return false;
     }
