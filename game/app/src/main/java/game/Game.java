@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class Game {
     private String word;
     private ArrayList<Character> guessedLetters = new ArrayList<Character>();
-    private int attempts = 10;
+    private int attempts;
 
     // constructor 
     public Game(WordChoser choser) {
         this.word = choser.getRandomWordFromDictionary();
+        this.attempts = 10;
     }
 
     public Integer remainingAttempts() {
@@ -47,21 +48,14 @@ public class Game {
     }
 
     public Boolean isGameWon() {
-        for (int i = 1 ; i < word.length() ; i++) {
-            Character letter = word.charAt(i);
-            if (guessedLetters.indexOf(letter) == -1) {
-                return false;
-            }
-        }
-        return true;
-    }
+        if (getWordToGuess().contains("_")== false) { return true; }
 
-    public Boolean isGameLost() {
-        if (this.attempts == 0) {
-            System.out.println("You lost - play again!");
-            return true;
-        } 
         return false;
     }
 
+    public Boolean isGameLost() {
+        if (attempts == 0){ return true;}
+
+        return false;
+    }
 }

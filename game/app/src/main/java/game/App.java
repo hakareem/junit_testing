@@ -3,31 +3,34 @@ package game;
 import java.util.Scanner;
 
 public class App {
- public static void main(String[] args) {
-   WordChoser choser = new WordChoser();
-   Game game = new Game(choser); 
-   System.out.println("Welcome! Today the word to guess is:");
-   
-   do {
-    System.out.println(game.getWordToGuess());
+    public static void main(String[] args) {
+        WordChoser wordchoser = new WordChoser();
+        Game game = new Game(wordchoser);
 
-    System.out.println("Enter one letter to guess:");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the word guessing game!");
+        System.out.println("This is your word:");
 
-    Scanner scanner = new Scanner(System.in);
-    Character guess = scanner.nextLine().charAt(0);
-    Boolean result = game.guessLetter(guess);
+        while (game.isGameWon()==false) {
+            System.out.printf("Guess this word is: %s\n", game.getWordToGuess());
 
-     if (result) {
-         System.out.println("Right Letter!");
+            System.out.println("Give me a letter:");
+            // store users guess
+            char guess = scanner.next().charAt(0); 
+            // boolean indicating whether it's right or wrong
+            System.out.println(game.guessLetter(guess)); 
 
-         if(game.isGameWon()){
-          System.out.println("You Won - Well done!");
-          break;
-         }
-         
-     } else {
-         System.out.println("Wrong Letter...");
-     }
- } while (!game.isGameLost());
-  }
+            // winning and losing conditions   
+            if (game.isGameLost()) {
+                System.out.println("omg you're so bad");
+                break;
+            }
+            if (game.isGameWon()) {
+                System.out.println("omg you're so good");
+                break;
+            }
+        }
+        scanner.close();
+    }
 }
+
