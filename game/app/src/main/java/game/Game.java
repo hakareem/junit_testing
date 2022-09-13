@@ -3,61 +3,68 @@ package game;
 import java.util.ArrayList;
 
 public class Game {
+    // class properties
     private String word;
     private ArrayList<Character> guessedLetters = new ArrayList<Character>();
     private int attempts;
-    private String alert;
 
-    // constructor 
+
+    // class constructor 
     public Game(WordChoser choser) {
         this.word = choser.getRandomWordFromDictionary();
         this.attempts = 10;
     }
 
+    // returns number of attempts left
     public Integer remainingAttempts() {
         return this.attempts;
     }
 
+    // handles the word displayed to user logic 
     public String getWordToGuess() {
-        StringBuilder builder = new StringBuilder();
+        StringBuffer str = new StringBuffer(); // what is the difference between string builder and string buffer?
 
         for (int i = 0; i < this.word.length(); i++) {
             Character currentLetter = word.charAt(i);
-            if (i == 0) {
-                // first letter is always shown
-                builder.append(currentLetter);
+            
+            if (i == 0) { // first char always visible
+                str.append(currentLetter);
             } else {
-                // show letter only if it was already guessed
-                if (guessedLetters.indexOf(currentLetter) != -1) {
-                    builder.append(currentLetter);
+                if (guessedLetters.indexOf(currentLetter) != -1) { // append char if guess is correct
+                    str.append(currentLetter);
                 } else {
-                    builder.append("_");
+                    str.append("_");
                 }
             }
         }
-        return builder.toString();
+        return str.toString();
     }
 
-    public String guessLetter(Character letter) {
-        if (this.word.indexOf(letter) != -1) {
-            guessedLetters.add(letter);
-            return "Nice, but stop cheating ;/";
+    // handling user's guess
+    public String guessLetter(char character) {
+        character = Character.toUpperCase(character); // storing char inputted by user 
+
+        if (guessedLetters.contains(character)) {
+            return "This letter has already been used before";
+        }
+
+        guessedLetters.add(character); 
+
+        if (this.word.contains(String.valueOf(character))) {  // if word contains that character
+            return "Nice!";
         } else {
             attempts--;
             return String.format("Wrong, %d attemps left.", this.attempts);
-
         }
     }
 
     public Boolean isGameWon() {
-        if (getWordToGuess().contains("_") == false) { return true; }
-
-        return false;
+        if (getWordToGuess().contains("_") == true) { return false; }
+        return true;
     }
 
     public Boolean isGameLost() {
-        if (attempts == 0){ return true;}
-
+        if (attempts == 0){ return true; }
         return false;
     }
 }
