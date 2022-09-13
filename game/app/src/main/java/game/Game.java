@@ -1,12 +1,14 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
     // class properties
     public String word;
     public ArrayList<Character> guessedLetters = new ArrayList<Character>();
     private int attempts;
+    public ArrayList<Number> players = new ArrayList<Number>();
 
 
     // class constructor 
@@ -15,6 +17,15 @@ public class Game {
         this.attempts = 10;
     }
 
+    // randomise player selection
+    public Number playerPlaying() {
+        Random rnd = new Random();
+        Integer random = rnd.nextInt(players.size());
+        Number player = players.get(random);
+
+        return player;
+    }
+    
     // returns number of attempts left
     public Integer remainingAttempts() {
         return this.attempts;
