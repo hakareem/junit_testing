@@ -6,15 +6,6 @@ import static org.mockito.Mockito.*;
 import org.junit.Test;
 
 public class GameTest {
-    @Test public void testGetsMaskedWord() {
-        WordChoser mockedChoser = mock(WordChoser.class);
-        when(mockedChoser.getRandomWordFromDictionary()).thenReturn("DRAGON");
-
-        Game game = new Game(mockedChoser);
-
-        assertEquals(game.getWordToGuess(), "D_____");
-    }
-
     @Test public void attemptsCounter() {
         WordChoser mockedChoser = mock(WordChoser.class);
         when(mockedChoser.getRandomWordFromDictionary()).thenReturn("PESSI");
@@ -28,7 +19,9 @@ public class GameTest {
         when(mockedChoser.getRandomWordFromDictionary()).thenReturn("PESSI");
 
         Game game = new Game(mockedChoser);
-        assertEquals(game.getWordToGuess(), "P____");
+        Masker masker = new Masker();
+
+        assertEquals(masker.getMaskedWord(game.word, game.guessedLetters), "P____");
     }
 
 
@@ -55,9 +48,10 @@ public class GameTest {
         when(mockedChoser.getRandomWordFromDictionary()).thenReturn("MAKERS");
 
         Game game = new Game(mockedChoser);
+        Masker masker = new Masker();
 
         assertEquals(game.guessLetter('K'), true);
-        assertEquals(game.getWordToGuess(), "M_K___");
+        assertEquals(masker.getMaskedWord(game.word, game.guessedLetters), "M_K___");
     }
 
     @Test public void testWrongLetterGuessed() {
@@ -65,9 +59,10 @@ public class GameTest {
         when(mockedChoser.getRandomWordFromDictionary()).thenReturn("MAKERS");
 
         Game game = new Game(mockedChoser);
+        Masker masker = new Masker();
 
         assertEquals(game.guessLetter('O'), false);
-        assertEquals(game.getWordToGuess(), "M_____");
+        assertEquals(masker.getMaskedWord(game.word, game.guessedLetters), "M_____");
     }
 
     @Test public void testIsWon() {
