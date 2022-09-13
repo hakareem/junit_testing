@@ -6,13 +6,20 @@ public class App {
     public static void main(String[] args) {
         WordChoser wordchoser = new WordChoser();
         Game game = new Game(wordchoser);
+        Masker masker = new Masker();
+
 
         Scanner scanner = new Scanner(System.in); // creating a scanner object
         System.out.println("Welcome to the word guessing game!");
-        System.out.println("This is your word:");
+        
+        System.out.println("Today the word to guess is:");
 
         while (game.isGameWon()== false) {
-            System.out.printf("Guess this word is: %s\n", game.getWordToGuess()); 
+            
+            System.out.printf("Guess this word: %s\n", masker.getMaskedWord(game.word, game.guessedLetters)); 
+            
+            // System.out.println("Enter name for player 1:");
+            // String player_1 = scanner.next();
 
             System.out.println("Give me a letter:");
             char guess = scanner.next().charAt(0); // reading and storing user input
