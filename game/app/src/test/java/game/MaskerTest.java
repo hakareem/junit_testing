@@ -8,6 +8,7 @@ public class MaskerTest {
     @Test
     public void testGetsMaskedWord() {
         Masker masker = new Masker();
+
         ArrayList<Character> guessedLetters = new ArrayList<Character>();
         guessedLetters.add('E');
         guessedLetters.add('V');
