@@ -3,12 +3,17 @@ package game;
 import java.util.Random;
 
 public class WordChoser {
-  public static final String[] DICTIONARY = {"PENALDO", "PENZEMA", "PESSI", "LAKAKA"};
   
+  static final String[] DICTIONARY = {"PENALDO", "PENZEMA", "PESSI", "LAKAKA"};
+  
+  public String[] getDictionary() {
+    return DICTIONARY;
+  }
+
   // selects a random word from the dictionary
   public String getRandomWordFromDictionary() {
-    Random rand = new Random();
-    return DICTIONARY[rand.nextInt(DICTIONARY.length)];
+    int rand = new Random().nextInt(DICTIONARY.length);
+    return DICTIONARY[rand];
   }
 }
 
