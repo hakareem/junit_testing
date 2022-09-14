@@ -11,10 +11,10 @@ public class Masker {
         for (int i = 0; i < word.length(); i++) {
             Character currentLetter = word.charAt(i);
             
-            if (i == 0) { // first char always visible
+            if (i == 0) { 
                 str.append(currentLetter);
             } else {
-                if (guessedLetters.indexOf(currentLetter) != -1) { // append char if guess is correct
+                if (guessedLetters.contains(currentLetter)) { // append char if guess is correct
                     str.append(currentLetter);
                 } else {
                     str.append("_");
