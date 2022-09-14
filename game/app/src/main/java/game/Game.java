@@ -1,62 +1,59 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game {
     // class properties
     public String word;
-    public ArrayList<Character> guessedLetters = new ArrayList<Character>();
     private int attempts;
+    public ArrayList<Character> guessedLetters = new ArrayList<Character>();
     public ArrayList<Number> players = new ArrayList<Number>();
-
+    private String playerName;
+    public Masker masker;
 
     // class constructor 
-    public Game(WordChoser choser) {
+    public Game(String playerName, WordChoser choser, Masker masker) {
         this.word = choser.getRandomWordFromDictionary();
         this.attempts = 10;
+        this.playerName = playerName;
+        this.masker = masker;
     }
 
-    // randomise player selection
-    public Number playerPlaying() {
-        Random rnd = new Random();
-        Integer random = rnd.nextInt(players.size());
-        Number player = players.get(random);
+    // handling user's guess
+    public boolean guessLetter(Character guess) {
+        int idx = this.word.indexOf(guess);
+        if (idx > -1) {
+            guessedLetters.add(guess);
+            return true;
+        }
 
-        return player;
+        this.attempts--;
+        System.out.printf("Wrong, %d attempts left!\n", this.attempts);
+        return false;
     }
-    
-    // returns number of attempts left
+
+    public String getPlayerName() {
+        return this.playerName;
+    }
+
+    public String getWordToGuess() {
+        return masker.getMaskedWord(this.word, this.guessedLetters);
+    }
+
+    public ArrayList<Character> getGuessedLetters() {
+        return guessedLetters;
+    }
+
     public Integer remainingAttempts() {
         return this.attempts;
     }
 
-    // handling user's guess
-    public String guessLetter(char character) {
-        character = Character.toUpperCase(character); // storing char inputted by user 
-
-        if (guessedLetters.contains(character)) {
-            return "This letter has already been used before";
-        }
-
-        guessedLetters.add(character); 
-
-        if (this.word.contains(String.valueOf(character))) {  // if word contains that character
-            return "Nice!";
-        } else {
-            attempts--;
-            return String.format("Wrong, %d attemps left.", this.attempts);
-        }
-    }
-
     public Boolean isGameWon() {
         Masker masker = new Masker();
-        if (masker.getMaskedWord(this.word, guessedLetters).contains("_") == true) { return false; }
-        return true;
+        return !(masker.getMaskedWord(this.word, guessedLetters).contains("_") == true);
     }
 
     public Boolean isGameLost() {
-        if (attempts == 0){ return true; }
-        return false;
+        return this.attempts == 0;
     }
 }
