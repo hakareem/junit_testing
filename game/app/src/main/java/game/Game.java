@@ -12,7 +12,7 @@ public class Game {
     public Masker masker;
 
     // class constructor 
-    public Game(String playerName, WordChoser choser, Masker masker) {
+    public Game(String playerName, WordChoser choser, Masker masker, int attempts) {
         this.word = choser.getRandomWordFromDictionary();
         this.attempts = 10;
         this.playerName = playerName;
@@ -20,16 +20,16 @@ public class Game {
     }
 
     // handling user's guess
-    public boolean guessLetter(Character guess) {
+    public String guessLetter(Character guess) {
         int idx = this.word.indexOf(guess);
         if (idx > -1) {
             guessedLetters.add(guess);
-            return true;
+            return this.playerName + ", you got it right."; 
         }
 
         this.attempts--;
-        System.out.printf("Wrong, %d attempts left!\n", this.attempts);
-        return false;
+        System.out.printf("Wrong, %s you have %d attempts left!\n", this.playerName, this.attempts);
+        return this.playerName + ", you got it wrong.";
     }
 
     public String getPlayerName() {

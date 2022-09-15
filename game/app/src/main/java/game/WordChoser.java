@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class WordChoser {
   
-  static final String[] DICTIONARY = {"PENALDO", "PENZEMA", "PESSI", "LAKAKA"};
+  static final String[] DICTIONARY = {"FOOTBALL", "MACBOOK", "MONITOR", "UNIVERSE"};
   
   public String[] getDictionary() {
     return DICTIONARY;
